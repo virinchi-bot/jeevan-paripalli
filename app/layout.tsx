@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     "good person",
   ],
   alternates: { canonical: "/" },
+  verification: {
+    google: "Gg5Fhd2ztlW9xwF8PHMM2sQ17hHZgRqv7rIChYmkedQ",
+  },
   openGraph: {
     type: "profile",
     url: "/",
