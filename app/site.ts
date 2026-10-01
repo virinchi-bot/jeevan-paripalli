@@ -2,7 +2,7 @@
 // TODO: REPLACE THE DOMAIN BELOW with your real domain
 // (e.g. https://jeevanparipelli.com) before deploying.
 // ============================================================
-export const SITE_URL = "https://paripelli-jeevan.vercel.com";
+export const SITE_URL = "https://paripelli-jeevan.vercel.app";
 
 export const NAME = "Jeevan Paripelli";
 export const INSTAGRAM_HANDLE = "@jvnn_007";
