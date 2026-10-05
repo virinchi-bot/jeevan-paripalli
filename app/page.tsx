@@ -1,119 +1,134 @@
-import Image from "next/image";
-import {
-  SITE_URL,
-  NAME,
-  INSTAGRAM_HANDLE,
-  INSTAGRAM_URL,
-  DESCRIPTION,
-} from "./site";
+const SITE_URL = "https://jeevan-paripelli.vercel.app";
+const INSTAGRAM_URL = "https://www.instagram.com/jvnn_007/";
+const IMAGE_URL = `${SITE_URL}/profile.jpg`;
 
-// Structured data: only facts that were actually provided.
-const jsonLd = {
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": `${SITE_URL}/#person`,
-  name: NAME,
-  givenName: "Jeevan",
-  familyName: "Paripelli",
-  alternateName: "jvnn_007",
-  url: SITE_URL,
-  image: `${SITE_URL}/profile.jpeg`,
-  description: DESCRIPTION,
-  sameAs: [INSTAGRAM_URL],
-  mainEntityOfPage: SITE_URL,
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE_URL}/#profile`,
+      url: SITE_URL,
+      name: "Jeevan Paripelli | Personal Profile",
+      description:
+        "Personal profile page for Jeevan Paripelli and his public Instagram identity.",
+      mainEntity: {
+        "@id": `${SITE_URL}/#jeevan`,
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#jeevan`,
+      name: "Jeevan Paripelli",
+      alternateName: "jvnn_007",
+      url: SITE_URL,
+      image: IMAGE_URL,
+      description:
+        "Jeevan Paripelli, publicly represented online as @jvnn_007.",
+      sameAs: [INSTAGRAM_URL],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Jeevan Paripelli",
+      publisher: {
+        "@id": `${SITE_URL}/#jeevan`,
+      },
+    },
+  ],
 };
 
 export default function Home() {
   return (
-    <>
+    <main className="page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(structuredData),
         }}
       />
 
-      <main className="page">
+      <article className="profile">
         <header className="hero">
-          <figure className="portrait rise" style={{ animationDelay: "0ms" }}>
-            {/* TODO: replace /public/profile.jpeg with Jeevan's real photo.
-                Recommended: portrait, 4:5 ratio, at least 1200x1500px. */}
-            <Image
-              src="/profile.jpeg"
-              alt="Portrait of Jeevan Paripelli"
-              width={800}
-              height={1000}
-              priority
-              sizes="(max-width: 640px) 80vw, 360px"
-            />
-          </figure>
+          <img
+            src="/profile.jpg"
+            alt="Jeevan Paripelli"
+            width={400}
+            height={400}
+            className="avatar"
+            fetchPriority="high"
+          />
 
-          <h1 className="name rise" style={{ animationDelay: "120ms" }}>
-            Jeevan Paripelli
-          </h1>
-          <p className="tagline rise" style={{ animationDelay: "220ms" }}>
+          <p className="eyebrow">PERSONAL PROFILE</p>
+
+          <h1>Jeevan Paripelli</h1>
+
+          <p className="intro">
             Just being myself.
           </p>
 
           <a
-            className="pill rise"
-            style={{ animationDelay: "320ms" }}
+            className="instagram"
             href={INSTAGRAM_URL}
             target="_blank"
-            rel="me noopener noreferrer"
-            aria-label="Jeevan Paripelli on Instagram (opens in a new tab)"
+            rel="noopener noreferrer"
+            aria-label="Open Jeevan Paripelli Instagram profile @jvnn_007"
           >
-            {INSTAGRAM_HANDLE} <span aria-hidden="true">↗</span>
+            <span>Instagram</span>
+            <span>@jvnn_007 ↗</span>
           </a>
         </header>
 
-        <section className="about rise" style={{ animationDelay: "420ms" }} aria-labelledby="about-title">
-          <h2 id="about-title" className="eyebrow">
+        <section aria-labelledby="about-heading">
+          <p className="section-label">ABOUT</p>
+
+          <h2 id="about-heading">
             Hello
           </h2>
-          {/* TODO: edit this copy freely. Only add facts you want public. */}
-          <p className="lede">
-            I&rsquo;m Jeevan &mdash; this is a small, quiet corner of the
+
+          <p>
+            I'm Jeevan. This is a small, quiet corner of the
             internet that belongs to me.
           </p>
+
           <p>
-            Kindness and goodness &mdash; <span lang="te">మంచితనం</span>,
-            manchithanam &mdash; are words I&rsquo;d be happy to be known by.
-          </p>
-          <p>
-            If you&rsquo;d like to find me, Instagram is where I am.
+            My public online identity is connected to{" "}
+            <strong>Jeevan Paripelli</strong> and{" "}
+            <strong>@jvnn_007</strong>.
           </p>
         </section>
 
-        <section className="social rise" style={{ animationDelay: "520ms" }} aria-labelledby="social-title">
-          <h2 id="social-title" className="eyebrow">
-            Find me
+        <section
+          className="context"
+          aria-labelledby="context-heading"
+        >
+          <p className="section-label">A LITTLE CONTEXT</p>
+
+          <h2 id="context-heading">
+            Goodness matters.
           </h2>
+
+          <p>
+            Kindness and goodness, or{" "}
+            <strong>manchithanam</strong> (
+            <span lang="te">మంచితనం</span>
+            ), are simple qualities worth carrying with you.
+          </p>
+        </section>
+
+        <footer className="footer">
+          <p>Jeevan Paripelli</p>
+
           <a
-            className="social-link"
             href={INSTAGRAM_URL}
             target="_blank"
-            rel="me noopener noreferrer"
+            rel="noopener noreferrer"
           >
-            <span className="social-label">Instagram</span>
-            <span className="social-handle">
-              {INSTAGRAM_HANDLE} <span aria-hidden="true">↗</span>
-            </span>
+            Instagram · @jvnn_007
           </a>
-        </section>
-      </main>
-
-      <footer className="footer">
-        <span>{NAME}</span>
-        <a
-          href={INSTAGRAM_URL}
-          target="_blank"
-          rel="me noopener noreferrer"
-          aria-label="Jeevan Paripelli on Instagram"
-        >
-          Instagram
-        </a>
-      </footer>
-    </>
+        </footer>
+      </article>
+    </main>
   );
 }
